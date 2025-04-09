@@ -1,0 +1,227 @@
+/* Container & Layout */
+.container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+
+/* Header Section */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  font-size: 50px;
+  color: #333;
+}
+
+.register-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.register-button:hover {
+  background-color: #45a049;
+}
+
+/* Summary */
+.summary {
+  display: flex;
+  justify-content: flex-start;
+  gap: 40px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.summary p {
+  margin: 0;
+  font-weight: bold;
+}
+
+/* Download Button */
+.download-button {
+  float: right;
+  margin-bottom: 20px;
+  padding: 8px 14px;
+  font-size: 14px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.download-button:hover {
+  background-color: #0069d9;
+}
+
+/* Filter Buttons */
+.filter-buttons {
+  margin-bottom: 20px;
+}
+
+.filter-buttons button {
+  margin-right: 10px;
+  padding: 8px 14px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #f5f5f5;
+  transition: background-color 0.2s ease;
+}
+
+.filter-buttons .active,
+.filter-buttons button:hover {
+  background-color: #ddd;
+}
+
+/* Message */
+.message {
+  margin-top: 10px;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  font-weight: bold;
+  color: #333;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+.present {
+  color: green;
+  font-weight: bold;
+}
+
+.absent {
+  color: red;
+  font-weight: bold;
+}
+
+.no-data {
+  text-align: center;
+  font-style: italic;
+  color: #999;
+}
+.message {
+  font-size: 0.9rem;
+  color: #007bff;
+  margin-top: 5px;
+}
+body {
+  background-color: #fdf6e3; /* light beige background */
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: #7B3F00;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  font-family: inherit;
+}
+
+html {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+
+.register-button {
+  background-color: #7B3F00;
+  color: #fff;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.register-button:hover {
+  background-color: #5a2e00;
+}
+
+.download-button {
+  background-color: #A0522D;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.download-button:hover {
+  background-color: #804020;
+}
+
+.filter-buttons button {
+  margin-right: 10px;
+  padding: 8px 14px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #f0e6d2;
+  color: #5a3e1b;
+  transition: background-color 0.2s ease;
+}
+
+.filter-buttons .active,
+.filter-buttons button:hover {
+  background-color: #d2a679;
+}
+.message {
+  font-size: 0.9rem;
+  margin-top: 5px;
+  font-weight: 500;
+  color: #5a3e1b;
+}
+
+/* Neutral/informational */
+.message.info {
+  color: #5a3e1b; /* warm brown */
+}
+
+/* Success messages */
+.message.success {
+  color: #2e7d32; /* earthy green */
+}
+
+/* Warning messages */
+.message.warning {
+  color: #c77c0a; /* muted golden orange */
+}
+
+/* Error messages */
+.message.error {
+  color: #a93226; /* warm rust red */
+}

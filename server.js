@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -8,7 +10,11 @@ const PORT = process.env.PORT || 5000;
 const uri = process.env.MONGODB_URI;
 
 
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+
   .then(() => console.log("✅ Connected to MongoDB Atlas"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
@@ -31,6 +37,18 @@ app.get("/attendance", async (req, res) => {
     res.json(data);
   } catch (err) {
     res.status(500).json({ error: "Server error" });
+  }
+});
+app.get("/debug", async (req, res) => {
+  try {
+    const dbName = mongoose.connection.name;
+    const collections = await mongoose.connection.db.listCollections().toArray();
+    res.json({
+      connectedTo: dbName,
+      collections: collections.map(col => col.name),
+    });
+  } catch (err) {
+    res.status(500).json({ error: "Debug error", details: err.message });
   }
 });
 
