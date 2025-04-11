@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
 import * as XLSX from "xlsx";
+const BASE_URL = process.env.REACT_APP_BACKEND_URL;
 
 
 function App() {
@@ -10,17 +11,29 @@ function App() {
   const [filterType, setFilterType] = useState("all");
   const [registering, setRegistering] = useState(false);
   const [message, setMessage] = useState("");
-  
+  const [flaskAvailable, setFlaskAvailable] = useState(false);
   const [presentCount, setPresentCount] = useState(0);
   const [absentCount, setAbsentCount] = useState(0);
 
   useEffect(() => {
     fetchAttendance();
+    checkFlaskStatus();
   }, []);
-
+  const checkFlaskStatus = async () => {
+    try {
+      const res = await axios.get("http://127.0.0.1:5001/ping");
+      if (res.status === 200) {
+        setFlaskAvailable(true);
+      }
+    } catch (error) {
+      setFlaskAvailable(false);
+      console.warn("Flask not available");
+    }
+  };
+  
   const fetchAttendance = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/attendance");
+      const response = await axios.get(`${BASE_URL}/attendance`);
       const data = response.data;
 
       if (Array.isArray(data)) {
@@ -81,7 +94,7 @@ function App() {
     setMessage("Sending register request...");
 
     try {
-      const res = await axios.post("http://127.0.0.1:5001/register");
+      const res = await axios.post(`${BASE_URL}/register`);
       if (res.data && res.data.status === "success") {
         setMessage("Register command sent. Waiting for fingerprint...");
         pollRegisterStatus(); // Begin polling for live status
@@ -107,7 +120,7 @@ function App() {
   const pollRegisterStatus = () => {
     const interval = setInterval(async () => {
       try {
-        const res = await axios.get("http://127.0.0.1:5001/register-status");
+        const res = await axios.get(`${BASE_URL}/register-status`);
         if (res.data.status) {
           setMessage(res.data.status);
 
@@ -134,16 +147,22 @@ function App() {
     <div className="container">
       <div className="header">
         <h1>Attendance Dashboard</h1>
-        <div style={{ textAlign: "right" }}>
-          <button
-            onClick={handleRegister}
-            disabled={registering}
-            className="register-button"
-          >
-            {registering ? "Registering..." : "Register New User"}
-          </button>
-          {message && <p className="message" style={{ marginTop: "8px" }}>{message}</p>}
-        </div>
+        {flaskAvailable && (
+  <div style={{ textAlign: "right" }}>
+    <button
+      onClick={handleRegister}
+      disabled={registering}
+      className="register-button"
+    >
+      {registering ? "Registering..." : "Register New User"}
+    </button>
+    {message && (
+      <p className="message" style={{ marginTop: "8px" }}>
+        {message}
+      </p>
+    )}
+  </div>
+)}
       </div>
   
       <div className="summary">

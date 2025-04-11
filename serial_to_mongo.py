@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 import os
 from flask_cors import CORS
 
+
 # Global status for real-time registration feedback
 current_register_status = "Idle"
 
@@ -16,7 +17,7 @@ mongo_uri = os.getenv("MONGO_URI")
 
 # Flask setup
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=["https://biometric-attendance-app-tc41.vercel.app"])
 
 # Serial connection (update COM port if needed)
 ser = serial.Serial("COM6", 9600)
@@ -98,6 +99,11 @@ def register():
 @app.route("/register-status", methods=["GET"])
 def register_status():
     return jsonify({"status": current_register_status})
+
+
+@app.route("/ping")
+def ping():
+    return "pong", 200
 
 
 # ========== Start Server & Serial Thread ========== #
