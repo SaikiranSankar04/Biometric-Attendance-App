@@ -3,8 +3,6 @@ import axios from "axios";
 import "./App.css";
 import * as XLSX from "xlsx";
 
-const BASE_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5001";
-
 
 function App() {
   const [attendance, setAttendance] = useState([]);
@@ -12,15 +10,15 @@ function App() {
   const [filterType, setFilterType] = useState("all");
   const [registering, setRegistering] = useState(false);
   const [message, setMessage] = useState("");
- 
+  const [flaskAvailable, setFlaskAvailable] = useState(false);
   const [presentCount, setPresentCount] = useState(0);
   const [absentCount, setAbsentCount] = useState(0);
 
   useEffect(() => {
     fetchAttendance();
-   
+    checkFlaskStatus();
   }, []);
-  /*const checkFlaskStatus = async () => {
+  const checkFlaskStatus = async () => {
     try {
       const res = await axios.get("http://127.0.0.1:5001/ping");
       if (res.status === 200) {
@@ -31,10 +29,10 @@ function App() {
       console.warn("Flask not available");
     }
   };
-  */
+  
   const fetchAttendance = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/attendance`);
+      const response = await axios.get("http://localhost:5000/attendance");
       const data = response.data;
 
       if (Array.isArray(data)) {
@@ -95,7 +93,7 @@ function App() {
     setMessage("Sending register request...");
 
     try {
-      const res = await axios.post(`${BASE_URL}/register`);
+      const res = await axios.post("http://127.0.0.1:5001/register");
       if (res.data && res.data.status === "success") {
         setMessage("Register command sent. Waiting for fingerprint...");
         pollRegisterStatus(); // Begin polling for live status
@@ -121,7 +119,7 @@ function App() {
   const pollRegisterStatus = () => {
     const interval = setInterval(async () => {
       try {
-        const res = await axios.get(`${BASE_URL}/register-status`);
+        const res = await axios.get("http://127.0.0.1:5001/register-status");
         if (res.data.status) {
           setMessage(res.data.status);
 
@@ -148,7 +146,7 @@ function App() {
     <div className="container">
       <div className="header">
         <h1>Attendance Dashboard</h1>
-        
+        {flaskAvailable && (
   <div style={{ textAlign: "right" }}>
     <button
       onClick={handleRegister}
@@ -163,7 +161,7 @@ function App() {
       </p>
     )}
   </div>
-)
+)}
       </div>
   
       <div className="summary">

@@ -8,9 +8,10 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 const uri = process.env.MONGODB_URI;
+console.log('MONGODB_URI:', process.env.MONGODB_URI);
 
 
-mongoose.connect(process.env.MONGO_URI, {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
