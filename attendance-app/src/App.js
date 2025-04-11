@@ -32,7 +32,7 @@ function App() {
   
   const fetchAttendance = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/attendance");
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/attendance`);
       const data = response.data;
 
       if (Array.isArray(data)) {
