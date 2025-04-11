@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
 import * as XLSX from "xlsx";
-const BASE_URL = process.env.REACT_APP_BACKEND_URL;
+
+const BASE_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:5001";
 
 
 function App() {
