@@ -147,7 +147,7 @@ function App() {
     <div className="container">
       <div className="header">
         <h1>Attendance Dashboard</h1>
-        {flaskAvailable && (
+        
   <div style={{ textAlign: "right" }}>
     <button
       onClick={handleRegister}
@@ -162,7 +162,7 @@ function App() {
       </p>
     )}
   </div>
-)}
+)
       </div>
   
       <div className="summary">
