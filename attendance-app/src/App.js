@@ -11,15 +11,15 @@ function App() {
   const [filterType, setFilterType] = useState("all");
   const [registering, setRegistering] = useState(false);
   const [message, setMessage] = useState("");
-  const [flaskAvailable, setFlaskAvailable] = useState(false);
+ 
   const [presentCount, setPresentCount] = useState(0);
   const [absentCount, setAbsentCount] = useState(0);
 
   useEffect(() => {
     fetchAttendance();
-    checkFlaskStatus();
+   
   }, []);
-  const checkFlaskStatus = async () => {
+  /*const checkFlaskStatus = async () => {
     try {
       const res = await axios.get("http://127.0.0.1:5001/ping");
       if (res.status === 200) {
@@ -30,7 +30,7 @@ function App() {
       console.warn("Flask not available");
     }
   };
-  
+  */
   const fetchAttendance = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/attendance`);
