@@ -23,7 +23,7 @@ CORS(app)
 ser = serial.Serial("COM6", 9600)
 
 # MongoDB setup
-client = pymongo.MongoClient("mongodb://localhost:27017/")
+client = pymongo.MongoClient(mongo_uri or "mongodb://localhost:27017/")
 db = client["biometric_attendance"]
 collection = db["attendances"]
 
