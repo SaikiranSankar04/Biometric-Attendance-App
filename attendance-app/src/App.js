@@ -252,7 +252,7 @@ function App() {
 
   const checkFlaskStatus = async () => {
     try {
-      const flaskUrl = process.env.REACT_APP_FLASK_URL; // Flask URL from env
+      const flaskUrl = process.env.REACT_APP_FLASK_URL || "http://127.0.0.1:5001";
       const res = await axios.get(`${flaskUrl}/ping`);
       if (res.status === 200) setFlaskAvailable(true);
     } catch (error) {
