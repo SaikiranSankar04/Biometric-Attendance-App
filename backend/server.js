@@ -7,9 +7,16 @@ const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const corsOptions = {
+  origin: process.env.NODE_ENV === "production"
+    ? "*"  // Allow all origins temporarily for production
+    : /^(http:\/\/localhost:\d+)$|^http:\/\/localhost\/.*$/,  // Allow all localhost:port during development
+};
+
+app.use(cors(corsOptions));
+
 const uri = process.env.MONGODB_URI;
 console.log('MONGODB_URI:', process.env.MONGODB_URI);
-
 
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
@@ -28,7 +35,6 @@ const attendanceSchema = new mongoose.Schema({
 const Attendance = mongoose.model("Attendance", attendanceSchema);
 
 // Middleware
-app.use(cors());
 app.use(express.json());
 
 // API Route: GET all attendance records
@@ -40,6 +46,7 @@ app.get("/attendance", async (req, res) => {
     res.status(500).json({ error: "Server error" });
   }
 });
+
 app.get("/debug", async (req, res) => {
   try {
     const dbName = mongoose.connection.name;
