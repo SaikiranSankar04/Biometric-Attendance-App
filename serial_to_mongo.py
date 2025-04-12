@@ -13,17 +13,17 @@ current_register_status = "Idle"
 
 # Load environment variables
 load_dotenv()
-mongo_uri = os.getenv("MONGO_URI")
+mongo_uri = os.getenv("MONGODB_URI")
 
 # Flask setup
 app = Flask(__name__)
-CORS(app, origins=["https://biometric-attendance-app-tc41.vercel.app"])
+CORS(app)
 
 # Serial connection (update COM port if needed)
 ser = serial.Serial("COM6", 9600)
 
 # MongoDB setup
-client = pymongo.MongoClient(mongo_uri or "mongodb://localhost:27017/")
+client = pymongo.MongoClient("mongodb://localhost:27017/")
 db = client["biometric_attendance"]
 collection = db["attendances"]
 
@@ -104,6 +104,13 @@ def register_status():
 @app.route("/ping")
 def ping():
     return "pong", 200
+
+
+# ========== API: Get Attendance Records ========== #
+@app.route("/attendance", methods=["GET"])
+def get_attendance():
+    records = list(collection.find({}, {"_id": 0}))  # Exclude Mongo's internal _id
+    return jsonify(records)
 
 
 # ========== Start Server & Serial Thread ========== #

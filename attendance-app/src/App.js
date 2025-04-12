@@ -32,7 +32,7 @@ function App() {
   
   const fetchAttendance = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/attendance`);
+      const response = await axios.get("http://localhost:5001/attendance");
       const data = response.data;
 
       if (Array.isArray(data)) {
@@ -51,7 +51,12 @@ function App() {
     let filtered = [];
 
     if (type === "present") {
-      filtered = data.filter((item) => item.timestamp.startsWith(today));
+      filtered = data
+      .filter((item) => item.timestamp.startsWith(today))
+    .map((item) => ({
+      ...item,
+      status: "Present", // Add status explicitly
+    }))
     } else if (type === "absent") {
       // Generate absent list by finding IDs not marked today
       const todayAttendees = data
@@ -67,7 +72,10 @@ function App() {
         status: "Absent",
       }));
     } else {
-      filtered = data;
+      filtered = data.map((item) => ({
+        ...item,
+        status: item.timestamp.startsWith(today) ? "Present" : "Past",
+      }));
     }
 
     setFilteredData(filtered);
