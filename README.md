@@ -12,7 +12,7 @@ To overcome these issues, we present a system with:
 4. React dashboard for real-time attendance visualization
 5. Timestamped logs with present/absent status and daily summary, can be downloaded in an excel sheet
 
-3 LAYER ARCHITECTURE OF THE SYSTEM
+### 3 LAYER ARCHITECTURE OF THE SYSTEM
 ![image](https://github.com/user-attachments/assets/d947fe01-27c6-4792-ad81-e96176764f70)
 
 ### Software Stack
