@@ -1,3 +1,5 @@
+# **A BIOMETRIC FINGERPRINT-BASED ATTENDANCE SYSTEM WITH REAL-TIME WEB DASHBOARD**
+
 Traditional attendance systems suffer from critical drawbacks:
 1. High latency due to cloud-only processing
 2. Manual proxy risks (RFID, ID cards)
@@ -21,5 +23,11 @@ To overcome these issues, we present a system with:
 | **Backend**  | Node.js & Express.js |
 | **Middleware** | Python & Flask |
 
-FEATURE: ROLE-BASED ACCESS 
-![image](https://github.com/user-attachments/assets/49bb3d84-0faa-46f9-988d-d671adad54fd)
+### Role-Based Access
+
+| **Role** | **Permissions** |
+|----------|-----------------|
+| **Admin** | Can enroll new users and mark attendance when the PC is connected to the hardware components (Arduino). |
+| **User**  | Can view attendance records and access the dashboard for attendance details. |
+
+
