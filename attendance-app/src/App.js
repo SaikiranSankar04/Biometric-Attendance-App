@@ -418,8 +418,8 @@ function App() {
       </div>
 
       <div className="summary">
-        <p><strong>Today's Present:</strong> {presentCount}</p>
-        <p><strong>Today's Absent:</strong> {absentCount}</p>
+        <p><strong>Present Today:</strong> {presentCount}</p>
+        <p><strong>Absent Today:</strong> {absentCount}</p>
       </div>
 
       <div className="filter-buttons">
